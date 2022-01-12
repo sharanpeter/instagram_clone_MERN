@@ -121,7 +121,11 @@ const Home=()=>{
          
          <h6>{item.likes.length } likes</h6>
          <h6>{item.caption}</h6>
-       
+         {
+             item.comments.map(comment=>{
+               return  <h6><span className='comment-name' key={comment._id}>{comment.postedBy.name} &nbsp;</span>{comment.text}</h6>
+             })
+         }
              
              
              

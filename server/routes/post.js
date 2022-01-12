@@ -99,6 +99,7 @@ router.put("/comment",requireLogin,(req,res)=>{
        },{
            new:true
        }).populate("comments.postedBy","_id name")
+       .populate("postedBy","_id name")
        .exec((err,result)=>{
            if(err){
                return res.status(422).json({error:err})
