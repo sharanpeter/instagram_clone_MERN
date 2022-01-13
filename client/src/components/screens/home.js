@@ -17,7 +17,7 @@ const Home=()=>{
             }
         }).then(res=>res.json())
         .then(result=>{
-            //  console.log(result)
+              console.log(result)
             setData(result)
         })
     },[])
@@ -95,6 +95,53 @@ const Home=()=>{
         .catch(err=>console.log(err))
     }
 
+
+    const deletePost=(postId)=>{
+        fetch(`deletepost/${postId}`,{
+            
+            method:"delete",
+            headers:{
+                
+                "Authorization":"Bearer "+localStorage.getItem("jwt")
+            }
+           
+        }) .then(res=>res.json())
+        .then(result=>{
+            
+            const updatedData= data.filter(item=>{
+                
+                    return item._id !== result._id
+                
+              
+            })
+            setData(updatedData)
+        })
+        .catch(err=>console.log(err))
+    } 
+
+    const deleteComment=(commentId)=>{
+        fetch(`deletepost/${commentId}`,{
+            
+            method:"delete",
+            headers:{
+                
+                "Authorization":"Bearer "+localStorage.getItem("jwt")
+            }
+           
+        }) .then(res=>res.json())
+        .then(result=>{
+            
+            const updatedData= data.filter(item=>{
+                
+                    return item._id !== result._id
+                
+              
+            })
+            setData(updatedData)
+        })
+        .catch(err=>console.log(err))
+    } 
+
  return(
      
      
@@ -104,7 +151,11 @@ const Home=()=>{
         <div className="home-card" key={item._id}>
      <div className="home-card-header">
      <img className="prof-small-img" src="https://iupac.org/wp-content/uploads/2018/05/default-avatar.png" />
+     
      <h6>{item.postedBy.name}</h6>
+     {item.postedBy._id==state._id  &&  
+     <p onClick={()=>deletePost(item._id)} className='delete-icon'><ion-icon name="trash-outline"></ion-icon> </p> }
+   
      </div>
 
         

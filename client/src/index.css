@@ -101,9 +101,22 @@ code {
 }
 
 .prof-small-img {
+  display: block;
   border-radius: 50%;
   height: 25px;
   width: 25px;
+}
+.home-card-header p {
+  font-size: larger;
+ position: absolute;
+ display: block;
+
+  
+  right: 475px;
+
+  margin-top: -5px;
+  /* text-align: right;
+  margin-left: 100px; */
 }
 .card-img {
   max-width: 100%;
