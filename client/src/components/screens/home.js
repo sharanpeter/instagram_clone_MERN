@@ -97,7 +97,7 @@ const Home=()=>{
 
 
     const deletePost=(postId)=>{
-        fetch(`deletepost/${postId}`,{
+        fetch(`/deletepost/${postId}`,{
             
             method:"delete",
             headers:{
@@ -119,8 +119,8 @@ const Home=()=>{
         .catch(err=>console.log(err))
     } 
 
-    const deleteComment=(commentId)=>{
-        fetch(`deletepost/${commentId}`,{
+    const deleteComment=(postId,commentId)=>{
+        fetch(`/deletecomment/${postId}/${commentId}`,{
             
             method:"delete",
             headers:{
@@ -131,13 +131,17 @@ const Home=()=>{
         }) .then(res=>res.json())
         .then(result=>{
             
-            const updatedData= data.filter(item=>{
-                
-                    return item._id !== result._id
-                
-              
+            const updatedData= data.map(item=>{
+                if(item._id==result._id){
+                    return result
+                }
+                else{
+                    return item
+                }
             })
             setData(updatedData)
+              
+           
         })
         .catch(err=>console.log(err))
     } 
@@ -174,7 +178,11 @@ const Home=()=>{
          <h6>{item.caption}</h6>
          {
              item.comments.map(comment=>{
-               return  <h6><span className='comment-name' key={comment._id}>{comment.postedBy.name} &nbsp;</span>{comment.text}</h6>
+               return  <h6><span className='comment-name' key={comment._id}>{comment.postedBy.name} &nbsp;</span>{comment.text} 
+               { comment.postedBy._id==state._id &&
+               <span onClick={()=>deleteComment(item._id,comment._id)} style={{position:"absolute",right:"475px"}}><ion-icon name="close-outline"></ion-icon></span>
+               }
+               </h6>
              })
          }
              
