@@ -9,7 +9,7 @@ const jwt=require('jsonwebtoken')
 const User =mongoose.model("User")
 router.use(bodyParser.urlencoded({extended: true}))
 router.use(bodyParser.json())
-router.get('/protected',requireLogin,(req,res)=>res.send("hello"))
+
 
 
 

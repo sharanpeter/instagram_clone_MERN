@@ -17,8 +17,9 @@ const Navbar=()=>{
   }
   const navList=()=>{
     if(state){
-      return [ <li><Link to="/profile">Profile</Link></li>,
+      return [ <li><Link to="/profile">My Profile</Link></li>,
       <li><Link to="/createPost">New Post</Link></li>,
+      <li><Link to="/user/:userid">User Profile</Link></li>,
       <li>
       <button className="btn #e53935 red darken-1" type="submit" onClick={()=>logout()} >Logout</button>
       </li>]

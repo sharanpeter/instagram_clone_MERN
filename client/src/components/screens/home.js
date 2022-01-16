@@ -1,5 +1,6 @@
 
 import React, { useEffect, useState,useContext } from 'react'
+import { Link } from 'react-router-dom';
 
 import {UserContext } from "../../App";
 
@@ -156,7 +157,7 @@ const Home=()=>{
      <div className="home-card-header">
      <img className="prof-small-img" src="https://iupac.org/wp-content/uploads/2018/05/default-avatar.png" />
      
-     <h6>{item.postedBy.name}</h6>
+     <h6 style={{color:"white"}}><Link to={item.postedBy._id!==state._id ? "/user/"+item.postedBy._id : "/profile"}>{item.postedBy.name}</Link></h6>
      {item.postedBy._id==state._id  &&  
      <p onClick={()=>deletePost(item._id)} className='delete-icon'><ion-icon name="trash-outline"></ion-icon> </p> }
    

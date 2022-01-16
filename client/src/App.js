@@ -2,6 +2,7 @@ import React, { createContext, useEffect, useReducer,useContext } from 'react'
 import {BrowserRouter,Routes,Route, useNavigate  } from "react-router-dom"
 import Home from "./components/screens/home"
 import Profile from "./components/screens/profile"
+import UserProfile from "./components/screens/UserProfile"
 import Login from "./components/screens/login"
 import Signup from "./components/screens/signup"
 import Navbar from "./components/navbar"
@@ -28,6 +29,7 @@ const Routing=()=>{
     <Routes>
     <Route exact path='/' element={<Home/>} />
     <Route exact path='/profile' element={<Profile/>} />
+    <Route exact path='/user/:userid' element={<UserProfile/>} />
     <Route exact path='/signup' element={<Signup/>} />
     <Route exact path='/signin' element={<Login/>} />
     <Route exact path='/createpost' element={<CreatePost/>} />

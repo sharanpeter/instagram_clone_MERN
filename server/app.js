@@ -12,6 +12,8 @@ mongoose.connection.on('connected',()=>{
 
 require("./models/user")
 require("./models/post")
+
 app.use(require("./routes/auth"))
 app.use(require("./routes/post"))
+app.use(require("./routes/user"))
 app.listen(3000,()=>console.log("server up at 3000"))
