@@ -9,6 +9,7 @@ const Signup=()=>{
 
 const[password,setPassword]=useState("")
 const[name,setName]=useState("")
+const[username,setUsername]=useState("")
 const[email,setEmail]=useState("")
 const navigate=useNavigate()
 const PostData=()=>{
@@ -23,6 +24,7 @@ const PostData=()=>{
         body:JSON.stringify({
             name,
             email,
+            username,
             password
         })
     }).then(res=>res.json()) .catch(err=>console.log(err))
@@ -46,6 +48,7 @@ return (
 <h2>Signup</h2>
 <input  type="text" placeholder="name" value={name} onChange={(e)=> setName(e.target.value)}/>
 <input  type="text" placeholder="email" value={email} onChange={(e)=> setEmail(e.target.value)}/>
+<input  type="text" placeholder="username" value={username} onChange={(e)=> setUsername(e.target.value)}/>
 <input  type="password" placeholder="password" value={password} onChange={(e)=> setPassword(e.target.value)}/>
 <button className="btn #3f51b5 indigo" type="submit" onClick={()=>PostData()}>Submit</button>
 <h5>Already have an account?<br/>

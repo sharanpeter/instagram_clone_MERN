@@ -77,6 +77,23 @@ router.put("/unfollow",requireLogin,(req,res)=>{
 
 
 
+router.post("/updateprofilepic",requireLogin,(req,res)=>{
+ User.findByIdAndUpdate(req.user._id,{
+     pic:req.body.url
+ },{
+     new:true },
+ (err,result)=>{
+  if(err){
+      console.log(err)
+  }
+  res.json(result)
+
+ })
+})
+
+
+
+
 
 
 

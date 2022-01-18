@@ -157,7 +157,7 @@ const MyPosts=()=>{
      <div className="home-card-header">
      <img className="prof-small-img" src="https://iupac.org/wp-content/uploads/2018/05/default-avatar.png" />
      
-     <h6 style={{color:"white"}}><Link to={item.postedBy._id!==state._id ? "/user/"+item.postedBy._id : "/profile"}>{item.postedBy.name}</Link></h6>
+     <h6 style={{color:"white"}}><Link to={item.postedBy._id!==state._id ? "/user/"+item.postedBy._id : "/profile"}>{item.postedBy.username}</Link></h6>
      {item.postedBy._id==state._id  &&  
      <p onClick={()=>deletePost(item._id)} className='delete-icon'><ion-icon name="trash-outline"></ion-icon> </p> }
    
@@ -179,7 +179,7 @@ const MyPosts=()=>{
          <h6>{item.caption}</h6>
          {
              item.comments.map(comment=>{
-               return  <h6><span className='comment-name' key={comment._id}>{comment.postedBy.name} &nbsp;</span>{comment.text} 
+               return  <h6><span className='comment-name' key={comment._id}>{comment.postedBy.username} &nbsp;</span>{comment.text} 
                { comment.postedBy._id==state._id &&
                <span onClick={()=>deleteComment(item._id,comment._id)} style={{position:"absolute",right:"475px"}}><ion-icon name="close-outline"></ion-icon></span>
                }

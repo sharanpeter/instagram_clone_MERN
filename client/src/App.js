@@ -5,10 +5,11 @@ import Profile from "./components/screens/profile"
 import UserProfile from "./components/screens/UserProfile"
 import Login from "./components/screens/login"
 import Signup from "./components/screens/signup"
-import MyPosts from "./components/screens/MyPosts"
+import MyPosts from "./components/screens/myPosts"
 import Navbar from "./components/navbar"
 import CreatePost from './components/screens/createPost'
 import { reducer,initialState } from "./reducers/userReducer"
+import UpdatePfp from './components/screens/updatePfp'
 
 
 const Routing=()=>{
@@ -35,6 +36,8 @@ const Routing=()=>{
     <Route exact path='/signin' element={<Login/>} />
     <Route exact path='/createpost' element={<CreatePost/>} />
     <Route exact path='/MyPosts' element={<MyPosts/>} />
+    <Route exact path='/updateprofilepic' element={<UpdatePfp/>} />
+
     
     </Routes>
     

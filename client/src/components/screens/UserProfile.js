@@ -110,7 +110,8 @@ return  (
      <div  className="profile-header">
         <div className="prof-pic"><img src={userProfile.user.pic} height="200px" width="200px" /></div>
         <div>
-            <h5> {userProfile.user.name}</h5>
+            <h5 style={{fontWeight:"600"}}> {userProfile.user.username}</h5>
+            <h6> {userProfile.user.name}</h6>
             <div className="prof-desc">
             <h6>{userProfile.posts.length} posts</h6>
             <h6>{userProfile.user.followers.length} followers</h6>

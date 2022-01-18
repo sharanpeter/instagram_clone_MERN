@@ -39,8 +39,8 @@ router.post("/createpost",requireLogin,(req,res)=>{
 
 router.get("/allposts",(req,res)=>{
     Post.find()
-    .populate("postedBy","_id name")
-    .populate("comments.postedBy","_id name")
+    .populate("postedBy","_id name username")
+    .populate("comments.postedBy","_id name username")
     .sort('-createdAt')
     .then(foundposts=>{
         res.send(foundposts)
@@ -53,8 +53,8 @@ router.get("/allposts",(req,res)=>{
 router.get("/followingposts",requireLogin,(req,res)=>{
     // console.log(req.user.name)
     Post.find({postedBy:{$in:req.user.following}})
-    .populate("postedBy","_id name pic")
-    .populate("comments.postedBy","_id name")
+    .populate("postedBy","_id name pic username")
+    .populate("comments.postedBy","_id name username")
     .sort('-createdAt')
     .then(foundposts=>{
         res.send(foundposts)
@@ -64,7 +64,7 @@ router.get("/followingposts",requireLogin,(req,res)=>{
 
 router.get("/myposts",requireLogin,(req,res)=>{
     Post.find({postedBy:req.user._id})
-    .populate("postedBy","_id name pic")
+    .populate("postedBy","_id name pic username")
     .then(foundposts=>{
         res.send(foundposts)
     })
@@ -76,8 +76,8 @@ router.put("/like",requireLogin,(req,res)=>{
         $push:{likes:req.user._id}
        },{
            new:true
-       }).populate("postedBy","_id name pic")
-       .populate("comments.postedBy","_id name pic")
+       }).populate("postedBy","_id name pic username")
+       .populate("comments.postedBy","_id name pic username")
        .exec((err,result)=>{
            if(err){
                return res.status(422).json({error:err})
@@ -97,7 +97,7 @@ router.put("/unlike",requireLogin,(req,res)=>{
     },{
         new:true
     }).populate("postedBy","_id name pic")
-    .populate("comments.postedBy","_id name pic")
+    .populate("comments.postedBy","_id name pic username")
     .exec((err,result)=>{
         if(err){
             return res.status(422).json({error:err})
@@ -118,8 +118,8 @@ router.put("/comment",requireLogin,(req,res)=>{
         $push:{comments:comment}
        },{
            new:true
-       }).populate("comments.postedBy","_id name picl")
-       .populate("postedBy","_id name")
+       }).populate("comments.postedBy","_id name pic username")
+       .populate("postedBy","_id name pic username")
        .exec((err,result)=>{
            if(err){
                return res.status(422).json({error:err})
