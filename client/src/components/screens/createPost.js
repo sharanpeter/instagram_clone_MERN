@@ -26,7 +26,7 @@ const CreatePost=()=>{
                     }
                     else{
                         M.toast({html: "Posted successfully!",classes:"#039be5 light-blue darken-1"})
-                        navigate("/home")
+                        navigate("/")
                     }
                 }).catch(err=>console.log(err))
                

@@ -7,12 +7,12 @@ import {UserContext } from "../../App";
 
 
 
-const Home=()=>{
+const MyPosts=()=>{
     const [data,setData]=useState([])
     const [text,setComment]=useState("")
     const {state,dispatch}=useContext(UserContext)
     useEffect(()=>{
-        fetch('/followingposts',{
+        fetch('/myposts',{
             headers:{
                 "Authorization":"Bearer "+localStorage.getItem("jwt")
             }
@@ -155,9 +155,9 @@ const Home=()=>{
          return(
         <div className="home-card" key={item._id}>
      <div className="home-card-header">
-     <img className="prof-small-img" src={item.postedBy.pic}/>
+     <img className="prof-small-img" src="https://iupac.org/wp-content/uploads/2018/05/default-avatar.png" />
      
-     <h6 ><Link style={{color:"white"}} to={item.postedBy._id!==state._id ? "/user/"+item.postedBy._id : "/profile"}>{item.postedBy.name}</Link></h6>
+     <h6 style={{color:"white"}}><Link to={item.postedBy._id!==state._id ? "/user/"+item.postedBy._id : "/profile"}>{item.postedBy.name}</Link></h6>
      {item.postedBy._id==state._id  &&  
      <p onClick={()=>deletePost(item._id)} className='delete-icon'><ion-icon name="trash-outline"></ion-icon> </p> }
    
@@ -207,4 +207,4 @@ const Home=()=>{
  )
 }
 
-export default Home
+export default MyPosts

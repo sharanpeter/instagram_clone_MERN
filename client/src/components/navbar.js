@@ -19,7 +19,7 @@ const Navbar=()=>{
     if(state){
       return [ <li><Link to="/profile">My Profile</Link></li>,
       <li><Link to="/createPost">New Post</Link></li>,
-      <li><Link to="/user/:userid">User Profile</Link></li>,
+      <li><Link to="/myposts">My Posts</Link></li>,
       <li>
       <button className="btn #e53935 red darken-1" type="submit" onClick={()=>logout()} >Logout</button>
       </li>]
@@ -33,7 +33,7 @@ const Navbar=()=>{
   }
 return <nav>
 <div class="nav-wrapper">
-  <Link to={state?"/":"/signin"} class="brand-logo left">Logo</Link>
+  <Link to={state?"/":"/signin"} class="brand-logo left">Dupligram</Link>
   <ul id="nav-mobile" class="right hide-on-med-and-down navlinks">
    {navList()}
   </ul>

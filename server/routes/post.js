@@ -41,6 +41,21 @@ router.get("/allposts",(req,res)=>{
     Post.find()
     .populate("postedBy","_id name")
     .populate("comments.postedBy","_id name")
+    .sort('-createdAt')
+    .then(foundposts=>{
+        res.send(foundposts)
+    })
+    .catch(err=>console.log(err))
+})
+
+
+
+router.get("/followingposts",requireLogin,(req,res)=>{
+    // console.log(req.user.name)
+    Post.find({postedBy:{$in:req.user.following}})
+    .populate("postedBy","_id name pic")
+    .populate("comments.postedBy","_id name")
+    .sort('-createdAt')
     .then(foundposts=>{
         res.send(foundposts)
     })
@@ -49,7 +64,7 @@ router.get("/allposts",(req,res)=>{
 
 router.get("/myposts",requireLogin,(req,res)=>{
     Post.find({postedBy:req.user._id})
-    .populate("postedBy","_id name")
+    .populate("postedBy","_id name pic")
     .then(foundposts=>{
         res.send(foundposts)
     })
@@ -61,8 +76,8 @@ router.put("/like",requireLogin,(req,res)=>{
         $push:{likes:req.user._id}
        },{
            new:true
-       }).populate("postedBy","_id name")
-       .populate("comments.postedBy","_id name")
+       }).populate("postedBy","_id name pic")
+       .populate("comments.postedBy","_id name pic")
        .exec((err,result)=>{
            if(err){
                return res.status(422).json({error:err})
@@ -81,8 +96,8 @@ router.put("/unlike",requireLogin,(req,res)=>{
      $pull:{likes:req.user._id}
     },{
         new:true
-    }).populate("postedBy","_id name")
-    .populate("comments.postedBy","_id name")
+    }).populate("postedBy","_id name pic")
+    .populate("comments.postedBy","_id name pic")
     .exec((err,result)=>{
         if(err){
             return res.status(422).json({error:err})
@@ -103,7 +118,7 @@ router.put("/comment",requireLogin,(req,res)=>{
         $push:{comments:comment}
        },{
            new:true
-       }).populate("comments.postedBy","_id name")
+       }).populate("comments.postedBy","_id name picl")
        .populate("postedBy","_id name")
        .exec((err,result)=>{
            if(err){

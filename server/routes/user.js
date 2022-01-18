@@ -37,7 +37,7 @@ router.put("/follow",requireLogin,(req,res)=>{
         $push:{followers:req.user._id}
     },{
         new:true
-    },(err,result)=>{
+    },(err,followedUser)=>{
         if(err){
             return res.json({error:err})
         }
@@ -45,10 +45,10 @@ router.put("/follow",requireLogin,(req,res)=>{
             $push:{following:req.body.followId}
         },{
             new:true
-        }).then(result=>{
-            res.json(result)
+        }).select("-password").then(followingUser=>{
+            res.json({followedUser,followingUser})
         }).catch(err=>console.log(err))
-    })
+    }).select("-password")
    
 
 })
@@ -59,7 +59,7 @@ router.put("/unfollow",requireLogin,(req,res)=>{
         $pull:{followers:req.user._id}
     },{
         new:true
-    },(err,result)=>{
+    },(err,followedUser)=>{
         if(err){
             return res.json({error:err})
         }
@@ -67,10 +67,10 @@ router.put("/unfollow",requireLogin,(req,res)=>{
             $pull:{following:req.body.unfollowId}
         },{
             new:true
-        }).then(result=>{
-            res.json(result)
-        }).catch(err=>console.log(err))
-    })
+        }).select("-password").then(followingUser=>{
+            res.json({followedUser,followingUser})
+                }).catch(err=>console.log(err))
+            }).select("-password")
    
 
 })

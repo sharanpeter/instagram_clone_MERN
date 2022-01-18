@@ -30,6 +30,7 @@ router.post('/signup',(req,res)=>{
       res.json({error:"User already exists"}).status(422)
     
     }
+    
      else {
          bcrypt.hash(password,12)
          .then( hashedpass=> {
@@ -70,8 +71,8 @@ router.post('/signin',(req,res)=>{
             if(trueres){
                 
                  const token =jwt.sign({_id:savedUser._id},process.env.JWT_SECRET)
-                 const{_id,email,name}=savedUser
-                 res.json({token,user:{_id,email,name}})
+                 const{_id,email,name,pic,followers,following}=savedUser
+                 res.json({token,user:{_id,email,name,pic,followers,following}})
                   }
             else{res.json({error:"enter valid password"})}
             })

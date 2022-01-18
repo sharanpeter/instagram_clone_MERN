@@ -26,13 +26,18 @@ return  (
     <div className="profile">
    
      <div  className="profile-header">
-        <div className="prof-pic"><img src="https://iupac.org/wp-content/uploads/2018/05/default-avatar.png" height="200px" width="200px" /></div>
+        <div className="prof-pic">
+        <img src={state?state.pic:"..."} height="200px" width="200px" />
+        <button style={{borderRadius:"1px",fontSize:"30px",margin:"-20px -40px 5px 150px"}} className="btn #3f51b5 indigo" type="submit" >        <ion-icon name="camera-reverse-outline">upload profile pic </ion-icon>
+</button>
+
+        </div>
         <div>
             <h5> {state?state.name:"loading..."}</h5>
             <div className="prof-desc">
-            <h6>3 posts</h6>
-            <h6>4 followers</h6>
-            <h6>5 following</h6>
+            <h6>{data.length} posts</h6>
+            <h6>{state?state.followers.length:0} followers</h6>
+            <h6>{state?state.following.length:0} following</h6>
             </div>
         </div>
      </div> 
