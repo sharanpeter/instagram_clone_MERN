@@ -65,6 +65,7 @@ router.get("/followingposts",requireLogin,(req,res)=>{
 router.get("/myposts",requireLogin,(req,res)=>{
     Post.find({postedBy:req.user._id})
     .populate("postedBy","_id name pic username")
+    .populate("comments.postedBy","_id name username")
     .then(foundposts=>{
         res.send(foundposts)
     })
@@ -96,7 +97,7 @@ router.put("/unlike",requireLogin,(req,res)=>{
      $pull:{likes:req.user._id}
     },{
         new:true
-    }).populate("postedBy","_id name pic")
+    }).populate("postedBy","_id name pic username")
     .populate("comments.postedBy","_id name pic username")
     .exec((err,result)=>{
         if(err){

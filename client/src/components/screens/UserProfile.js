@@ -11,7 +11,7 @@ const UserProfile=()=>{
     const {state,dispatch}=useContext(UserContext)
     const {userid} =useParams()
     const [followed,setFollowed]=useState(state?!state.following.includes(userid):true)
-    // console.log(userid)
+     console.log(userid)
     useEffect(()=>{
         
     fetch(`/user/${userid}`,{
@@ -60,7 +60,7 @@ const UserProfile=()=>{
                   })
                   setFollowed(false)
 
-            // setProfile(result.followedUser)
+          
                   console.log(userProfile)
             
         })

@@ -92,6 +92,16 @@ router.post("/updateprofilepic",requireLogin,(req,res)=>{
 })
 
 
+router.post("/searchusers",requireLogin,(req,res)=>{
+    let userPattern = new RegExp("^"+req.body.query)
+    User.find({username:{$regex:userPattern}})
+    .select("_id username pic")
+    .then(user=>{
+        res.json({user})
+    }).catch(err=>console.log(err))
+})
+
+
 
 
 
