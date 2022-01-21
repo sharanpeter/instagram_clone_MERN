@@ -16,7 +16,7 @@ router.use(bodyParser.json())
 router.post('/signup',(req,res)=>{
     const {name,email,password,username}=req.body
    
-
+    console.log(name,email,username)
   if(!name || !password || !email || !username){
       res.status(422).json({error:"please fill in all the fields"})
        }
@@ -43,7 +43,7 @@ router.post('/signup',(req,res)=>{
     
      else {
 
-
+        
       
          bcrypt.hash(password,12)
          .then( hashedpass=> {

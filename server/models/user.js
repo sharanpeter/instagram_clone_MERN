@@ -12,10 +12,10 @@ const userSchema= new mongoose.Schema({
         default:"https://iupac.org/wp-content/uploads/2018/05/default-avatar.png"
     },
     followers:[{
-      type:ObjectId,ref:"User",sparse:true
+      type:ObjectId,ref:"User"
     }],
     following:[{
-        type:ObjectId,ref:"User",sparse:true
+        type:ObjectId,ref:"User"
       }]
 })
 
