@@ -9,6 +9,7 @@ import {UserContext } from "../../App";
 
 const Home=()=>{
     const [data,setData]=useState([])
+    const [userData,setUserData]=useState([])
     const [text,setComment]=useState("")
     const {state,dispatch}=useContext(UserContext)
     useEffect(()=>{
@@ -20,6 +21,16 @@ const Home=()=>{
         .then(result=>{
               console.log(result)
             setData(result)
+        })
+
+        fetch('/allusers',{
+            headers:{
+                "Authorization":"Bearer "+localStorage.getItem("jwt")
+            }
+        }).then(res=>res.json())
+        .then(result=>{
+              console.log(result)
+            setUserData(result.users)
         })
     },[])
 
@@ -151,7 +162,11 @@ const Home=()=>{
      
      
      <div className="home">
-        {data.map(item=>{
+
+     
+     
+        { state && state.following.length > 0 ?
+               data.map(item=>{
          return(
         <div className="home-card" key={item._id}>
      <div className="home-card-header">
@@ -197,10 +212,39 @@ const Home=()=>{
              <button type="button" className="btn comment-btn" onClick={()=>newComment(text,item._id)}>Post</button>
          </div>
          </div>
-     )})}
+         )})   
+     
+    
+     :
+     <div>
+    
+     <h2>Users you may know:</h2>
+     { userData ? userData.slice(1,4).map(item=>{
+      return   <div class="card recommendcard">
+     
+     <div class="card-image waves-effect waves-block waves-light dark">
+       <img class="activator" src={item.pic} />
+     </div>
+     <div class="card-content">
+       <span class="card-title activator  text-darken-4">{item.username}</span>
+       <button type="button" className="btn comment-btn"> <Link style={{color:"white"}} to={ "/user/"+item._id }>View Profile</Link></button>
+     </div>
+      
+   </div>
+     })
+     :
+     <h2>Loading</h2>
+    
+     }
+     </div>
+     
+         
+     }
     
      
-   
+      
+
+
         
          </div>
          

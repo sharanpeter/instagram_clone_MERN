@@ -101,6 +101,15 @@ router.post("/searchusers",requireLogin,(req,res)=>{
     }).catch(err=>console.log(err))
 })
 
+router.get("/allusers",requireLogin,(req,res)=>{
+   
+    User.find()
+    .select("_id username pic")
+    .then(users=>{
+        res.json({users})
+    }).catch(err=>console.log(err))
+})
+
 
 
 
